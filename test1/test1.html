@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="utils.js"></script>
+    <!-- <script src="1.js"></script> -->
+    <!-- <script src="2.js"></script> -->
+    <!-- <script src="3.js"></script> -->
+    <script src="4.js"></script>
+    <script>
+        console.log('========测试 new =======')
+        Factory.prototype.sayName = function () {
+            // console.log(this.name);
+            return this.name;
+        }
+        function Factory(name, age) {
+            this.name = name;
+            this.age = age;
+            return null
+        }
+        // const f1 = new Factory('June',18)
+        const f1 = objectFactory(Factory, 'June', 18);
+        console.log('new出来的对象：', f1)
+        console.log('new出来的对象的构造器(Factory)：', f1.constructor)
+        console.log('new出来的对象调用原型上的方法(June)：', f1.sayName())
+        // console.log('new出来的对象调用原型上的方法(June)：',f1.sayName())
+        console.log('========测试 new结束=======')
+        // console.log('========测试 大数相加=======')
+        // console.log('一样的长度（22222222222222222230）', add('11111111111111111111', '11111111111111111119'))
+        // console.log('不一样的长度（11111111111111111230）', add('111', '11111111111111111119'))
+        // console.log('不一样的长度（1111111110）', add('123456789', '987654321'))
+        // console.log('========测试 大数相加结束=======')
+        console.log('========测试 深度优先=======')
+        function Tree(value) {
+            this.value = value;
+            this.children = [];
+        }
+        const a = new Tree('a');
+        const b = new Tree('b');
+        const c = new Tree('c');
+        const d = new Tree('d');
+        const e = new Tree('e');
+        const f = new Tree('f');
+        const g = new Tree('g');
+        const j = new Tree('j');
+        const h = new Tree('h');
+        a.children.push(b, c, d)
+        b.children.push(e, f)
+        e.children.push(g)
+        g.children.push(j)
+        j.children.push(h)
+
+        console.log('深度优先递归（abegjhfcd）', dfs(a))
+        console.log('非递归', deepTravel(a))
+
+        console.log('广度优先递归（abcdefgjh）', bfs([a]))
+        console.log('非递归', reBfs(a))
+
+        console.log('========测试 深度优先结束=======')
+        console.log('========测试 平衡二叉树 =======')
+        function BianryTree(value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+        const aa = new BianryTree('a');
+        const bb = new BianryTree('b');
+        const cc = new BianryTree('c');
+        const dd = new BianryTree('d');
+        const ee = new BianryTree('e');
+        const ff = new BianryTree('f')
+        const gg = new BianryTree('g');
+        const hh = new BianryTree('h');
+        const jj = new BianryTree('j');
+
+        aa.left = bb;
+        aa.right = cc;
+        bb.left = dd;
+        bb.right = ee;
+        dd.left = ff;
+        cc.left = gg;
+        cc.right = jj;
+
+
+        const arr = [];
+        for (let i = 0; i < 1000; i++) {
+            arr[i] = Math.floor(Math.random() * 1000);
+        }
+        function constructorBalanceTree(arr) {
+            if (arr == null || arr.length == 0) return;
+            const root = new BianryTree(arr[0]);
+            for (let i = 0; i < arr.length; i++) {
+                addNode(root, arr[i])
+            }
+            return root;
+            function addNode(root, value) {
+                if (!root) return;
+                if (root.value == value) return;
+                if (root.value > value) {
+                    if (root.left == null) {
+                        const newNode = new BianryTree(value);
+                        root.left = newNode;
+                    } else {
+                        addNode(root.left, value)
+                    }
+                } else {
+                    if (root.right == null) {
+                        const newNode = new BianryTree(value);
+                        root.right = newNode;
+                    } else {
+                        addNode(root.right, value);
+                    }
+                }
+            }
+
+        }
+        const newRoot = constructorBalanceTree(arr);
+        const single2 = new BianryTree('2')
+        const single5 = new BianryTree('5')
+        const single3 = new BianryTree('3')
+        const single6 = new BianryTree('6')
+        single2.right = single5;
+        single5.left = single3;
+        single5.right = single6;
+
+        const double8 = new BianryTree('8')
+        const double5 = new BianryTree('5')
+        const double2 = new BianryTree('2')
+        const double7 = new BianryTree('7')
+        const double6 = new BianryTree('6')
+
+        double8.left = double5;
+        double5.left = double2
+        double5.right = double7;
+        double7.left = double6;
+
+
+        const singleRotate = changeBalanceTreeByRotate(single2);
+        console.log('检查单旋', isBalanceTree(singleRotate))
+
+        const doubleRotate = changeBalanceTreeByRotate(double8);
+        console.log('检查双旋', isBalanceTree(doubleRotate));
+
+        const finalRotate = changeBalanceTreeByRotate(newRoot);
+        console.log('最后检查', isBalanceTree(finalRotate))
+        console.log('平衡树最后多少层', getDeep(finalRotate))
+
+        console.log('========测试 平衡二叉树结束=======')
+        console.log('========测试 图的广度优先搜索=======')
+        console.log(bfsGraph([graphA], 'x'))
+        // console.log(reBfsGraph(graphA, 'x'))
+        console.log('========测试 图的广度结束=======')
+
+        console.log('========测试 图的深度优先搜索=======')
+        console.log(deepSearchGraph(graphA, 'b'))
+        console.log('========测试 图的深度结束=======')
+
+        console.log('========测试 kruskal=======')
+        console.log('kruskal(12131)', kruskal(distance, pointSet))
+        console.log('========测试 kruskal=======')
+
+        console.log('========测试 events=======')
+        const event = new Events();
+        event.on('sayName', function (name) {
+            console.log('测试on绑定成功，参数June', name)
+        })
+        const sayName = function (age) {
+            console.log('测试off绑定成功', age)
+        }
+        event.once('once', function (...args) {
+            console.log('绑定once', ...args)
+        })
+        event.on('sayName', sayName)
+        event.emit('sayName', 'June')
+        event.off('sayName', sayName)
+        event.emit('sayName', '第二次触发，测试是否移除off成功')
+
+        event.emit('once', '只会执行一次就销毁');
+        event.emit('once', '不存在');
+        event.emit('once', '不存在');
+        event.emit('once', '不存在');
+        console.log('========测试 events=======')
+
+
+       
+
+        console.log('========测试 myMap=======')
+        const arrMap = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        const newArrMap1 = arrMap.myMap((ele,index,self) => ele + 2)
+        console.log('+2',arrMap, newArrMap1)
+        console.log('========测试 myMap=======')
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

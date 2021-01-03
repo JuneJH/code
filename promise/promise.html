@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <script src="promise_1.js"></script> -->
+    <!-- <script src="promise_2.js"></script> -->
+    <script src="promise_3.js"></script>
+    <script>
+        // const myPro = new MyPromise((resolve, reject) => {
+        //     // throw new Error('run reject')
+        //     // reject('run reject handle')
+        //     // setTimeout(() => {
+        //         resolve('run resolve')
+        //     // }, 0)
+        // })
+        // console.log(myPro)
+
+        // myPro.catch(err=>{
+        //     console.log('there is first catch:=>:',err)
+        //     return 'this is first catch return info'
+        // }).then(resp=>{
+        //     console.log('there is then at first catch after:=>:',resp)
+        // })
+
+        // myPro.then(res => {
+        //     console.log('there is first then:(result)=>:', res)
+        //     return 'this is first thenableHandle result'
+        //     // return new MyPromise((resolve, reject) => {
+        //     //     resolve('new promise')
+        //     // })
+        // }, err => {
+        //     console.log('there is first then err:(result)=>:',err)
+        //     throw new  Error('345')
+        // })
+        // myPro.then(res => {
+        //     console.log(2, res)
+        //     // return new MyPromise((resolve, reject) => {
+        //     //     resolve('new promise')
+        //     // })
+        // }, err => {
+        //     console.log(err, '======================')
+        //     return '22222222222222222222'
+        // })
+        // myPro.then(res => {
+        //     console.log(3, res)
+        //     // return new MyPromise((resolve, reject) => {
+        //     //     resolve('new promise')
+        //     // })
+        // }, err => {
+        //     console.log(err, '======================')
+        //     return '22222222222222222222'
+        // })
+        // .then(res=>{
+        //     console.log('there is sec then:(result)=>:',res)
+        // },err=>{
+        //     console.log('there is sec err:(result)=>:',err)
+        // })
+        // console.log(myPro)
+
+        // new Promise((resolve,reject)=>{
+        //     reject(1)
+        // }).then(res=>{
+        //     console.log(res)
+        // },err=>{
+        //     console.log(err)
+        //     return '111111111111111111'
+        // }).then(res=>{
+        //     console.log(res)
+        // })
+        // console.log(myPro)
+
+
+        // 测试all
+        const arr = [];
+        for (let i = 0; i < 10; i++) {
+            arr[i] = new MyPromise((resolve, reject) => {
+                setTimeout(()=>{
+                    if(Math.random() < 0.5){
+                        resolve('0k')
+                    }else{
+                        reject('no')
+                    }
+                    // reject(111)
+                },1000)
+            })
+        }
+        // console.log(arr)
+        MyPromise.race(arr).then(res=>{
+            console.log(res)
+        },err=>{
+            console.log(err)
+        })
+
+    </script>
+</body>
+
+</html>
