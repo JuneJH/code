@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const iterator = {
+            total:3,
+            i:0,
+            next(){
+                return{
+                    value:this.i > this.total ? undefined : this.i++,
+                    done:this.i > this.total
+                }
+            }
+        }
+
+
+        function createIterator(){
+            let i = 0;
+            let total = 3;
+            return {
+              next(){
+                return {
+                    value:i > total ? undefined : i++,
+                    done:i > total
+                }
+            }
+            }
+        }
+
+
+        const iterators = {
+            total:3,
+            [Symbol.iterator]:createIterator
+        }
+
+        for (const iterator of iterators) {
+            console.log(iterator)
+        }
+
+        const i = iterators[Symbol.iterator]();
+        let result = i.next();
+        while(!result.done){
+            console.log("for...of原理",result.value)
+            result = i.next();
+        }
+
+    </script>
+</body>
+</html>
