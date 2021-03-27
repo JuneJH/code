@@ -8,48 +8,75 @@
 </head>
 <body>
     <script>
-        const iterator = {
-            total:3,
-            i:0,
-            next(){
-                return{
-                    value:this.i > this.total ? undefined : this.i++,
-                    done:this.i > this.total
-                }
-            }
+        // const iterator = {
+        //     total:3,
+        //     i:0,
+        //     next(){
+        //         return{
+        //             value:this.i > this.total ? undefined : this.i++,
+        //             done:this.i > this.total
+        //         }
+        //     }
+        // }
+
+
+        // function createIterator(){
+        //     let i = 0;
+        //     let total = 3;
+        //     return {
+        //       next(){
+        //         return {
+        //             value:i > total ? undefined : i++,
+        //             done:i > total
+        //         }
+        //     }
+        //     }
+        // }
+
+
+        // const iterators = {
+        //     total:3,
+        //     [Symbol.iterator]:createIterator
+        // }
+
+        // for (const iterator of iterators) {
+        //     console.log(iterator)
+        // }
+
+        // const i = iterators[Symbol.iterator]();
+        // let result = i.next();
+        // while(!result.done){
+        //     console.log("for...of原理",result.value)
+        //     result = i.next();
+        // }
+
+        function* g1(){
+            console.log("运行g1生成器");
+            yield "done"
         }
 
-
-        function createIterator(){
-            let i = 0;
-            let total = 3;
-            return {
-              next(){
-                return {
-                    value:i > total ? undefined : i++,
-                    done:i > total
-                }
-            }
-            }
+        function* generator(){
+            console.log("开始运行生成器函数");
+            yield*g1();
+            let result = yield "第一结束返回";
+            console.log("next传入参数",result);
+            result = yield result;
+            console.log("传入错误对象作为参数",result)
+            return
+            yield "error"
         }
 
+        const g = generator(); // 调用该函数并不会执行函数内的代码,只是放回一个生成器
+        let result = g.next(); // 开始执行函数内代码至第一个yield位置,并将yield后表达式的值返回
+        console.log("",result); // {value: "第一结束返回", done: false}
+        result = g.next("再次调用");// next的参数会作为yield的返回值形式给到函数内部，因此在第一次调用next方法是所带参数无意义,在未调用next时前面没有yield
+        console.log("",result);// 得到yield表达式的值为自己传入参数
+        result = g.next(new Error("我是错误对象"));//next()传入错误对象时,不影响内部函数执行
+        g.throw();// throw()会导致函数内部发生一个错误
 
-        const iterators = {
-            total:3,
-            [Symbol.iterator]:createIterator
-        }
-
-        for (const iterator of iterators) {
+        for (const iterator of g) {
             console.log(iterator)
         }
-
-        const i = iterators[Symbol.iterator]();
-        let result = i.next();
-        while(!result.done){
-            console.log("for...of原理",result.value)
-            result = i.next();
-        }
-
     </script>
-</body>
+</body>t
 </html>
