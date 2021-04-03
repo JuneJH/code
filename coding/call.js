@@ -9,7 +9,6 @@ Function.prototype.myCall = function (obj, ...args) {
     delete obj[func];
     return result;
 }
-
 Function.prototype.myCall = function (context,...args){
     if(typeof context === "symbol"){
         throw new Error("暂时不能处理Symbol对象")
