@@ -1,8 +1,11 @@
 function compose (...fn){
-    return (a)=>{
-        return fn.reduceRight((a,b)=>b(a),a)
+    if(fn.length === 0){
+        return args=>args
     }
-
+    if(fn.length === 1){
+        return fn[0]
+    }
+    return fn.reduce((a,b)=>(...args)=>a(b(...args)))
 }
 
 module.exports = {
