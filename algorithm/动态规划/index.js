@@ -24,4 +24,4 @@ var isMatch = function(s, p) {
 };
 
 
-console.log(isMatch("aa",'*'))
+// todo tdd
