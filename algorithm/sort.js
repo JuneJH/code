@@ -41,7 +41,9 @@ function insertSort(arr) {
 }
 
 // 快速
-
+// [2,3,5,7,9,1,4,6,8]  2,1,5,7,9,3,4,6,8
+// const compare = (a, b) => a > b ? true : false;
+// const change = (arr, a, b) => { [arr[a], arr[b]] = [arr[b], arr[a]] }
 function quickSort(arr) {
     function _quickSort(arr, start, end) {
         if (start > end - 1 || arr.length == 0 || start > arr.length) return;
@@ -54,17 +56,18 @@ function quickSort(arr) {
         } while (left < right);
         const middleIndex = right == left ? right - 1 : right;
         change(arr, middleIndex, start)
+        console.log(arr)
         _quickSort(arr, start, middleIndex)
         _quickSort(arr, middleIndex + 1, end)
     }
     _quickSort(arr, 0, arr.length)
 }
 
-// const arr = [8,1,2,5,3,4,9,7,6];
+const arr = [8,1,2,5,3,4,9,7,6];
 // // bubbleSort(arr);
-// // quickSort(arr)
+quickSort(arr)
 // insertSort(arr)
-// console.log(arr)
+console.log(arr)
 
 function mergeSort(arr) {  //采用自上而下的递归方法
     var len = arr.length;
