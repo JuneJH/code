@@ -1,19 +1,3 @@
-function ListNode(val, next) {
-    this.val = (val===undefined ? 0 : val)
-    this.next = (next===undefined ? null : next)
-}
-
-function nodeEach (root) {
-    console.log(root)
-    const result = [];
-    while(root != null){
-       result.push(root.val);
-        root = root.next;
-    }
-    console.log("rerr",result)
-    return result;
-}
-
 // 迭代方式
 const mergeTwoLists = function(list1, list2) {
     const result = {val:0,next:null};
@@ -49,4 +33,4 @@ const mergeTwoLists = function(list1, list2) {
 //      }
 //  };
 
-  module.exports = {mergeTwoLists,ListNode,nodeEach};
+  module.exports = {mergeTwoLists};
