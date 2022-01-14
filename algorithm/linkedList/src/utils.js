@@ -12,7 +12,29 @@ function nodeEach (root) {
     return result;
 }
 
+function nodeReverse(root) {
+    if(root.next.next == null){
+        root.next.next = root;
+        return root.next;
+    }else{
+        const result = nodeReverse(root.next)
+        root.next.next = root;
+        root.next = null;
+        return result;
+    }
+}
+
+function nodeLength (root) {
+    let len = 0;
+    while(root !== null) {
+        len ++;
+        root = root.next;
+    }
+    return len;
+}
 module.exports = {
     ListNode,
-    nodeEach
+    nodeEach,
+    nodeReverse,
+    nodeLength,
 }
