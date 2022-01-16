@@ -32,9 +32,29 @@ function nodeLength (root) {
     }
     return len;
 }
+
+/**
+ * 通过下标获取一个位置的数据
+ * @param {*} root 
+ * @param {*} index 
+ * @returns 
+ */
+function getValueIndex (root,index){
+    let len = 0;
+    while(root != null){
+        if(len == index){
+            return root.val;
+        }
+        len ++;
+        root = root.next;
+    }
+}
+
+
 module.exports = {
     ListNode,
     nodeEach,
     nodeReverse,
     nodeLength,
+    getValueIndex
 }

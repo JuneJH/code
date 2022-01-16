@@ -41,19 +41,7 @@ function nodeLength (root) {
 // console.log(nodeLength(a));
 console.log('======通过下标获取值====')
 
-// 通过下标获取一个位置的数据
 
-function getValueIndex (root,index){
-    let len = 0;
-    while(root != null){
-        if(len == index){
-            return root.value;
-        }
-        len ++;
-        root = root.next;
-    }
-    return void 0;
-}
 // console.log(getValueIndex(a,1));
 console.log('=====通过下标设置==========')
 
