@@ -24,7 +24,7 @@ function SearchValue(arr, value) {
 function Node(value) {
     this.value = value;
     this.left = null;
-    this.right == null;
+    this.right = null;
 }
 function createTree(arr) {
     if (arr == null || arr.length == 0) return;
