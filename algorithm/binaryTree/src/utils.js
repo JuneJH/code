@@ -101,13 +101,14 @@ function afterTraverseTree(root){
     const res = [],stack = [];
     while (root || stack.length > 0){
         while (root){
-            stack.push(root);
-            root = root.left;
+            res.push(root.val);
+            stack.push(root.left);
+            root = root.right;
         }
         root = stack.pop();
-        res.push(root.val);
-
     }
+    console.log(res)
+    return res.reverse();
 }
 
 module.exports = {
@@ -117,5 +118,6 @@ module.exports = {
     preTraverseTreeRecursion,
     midTraverseTreeRecursion,
     midTraverseTree,
-    afterTraverseTreeRecursion
+    afterTraverseTreeRecursion,
+    afterTraverseTree
 }

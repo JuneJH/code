@@ -8,42 +8,12 @@ function objectFactory() {
 }
 
 // 2.大数相加 add
-function add(a, b) {
-  a = '0' + a;
-  b = '0' + b;
-  const aArr = a.split('');
-  const bArr = b.split('');
-  const aLen = aArr.length;
-  const bLen = bArr.length;
-  const result = [];
-  let flag = 0;
-  if (aLen > bLen) {
-    for (i = 0; i < aLen - bLen; i++) {
-      bArr.unshift('0');
-    }
-  } else {
-    for (i = 0; i < bLen - aLen; i++) {
-      aArr.unshift('0')
-    }
-  }
-  for (let i = aArr.length - 1; i >= 0; i--) {
-    const re = +aArr[i] + +bArr[i] + flag;
-    if (re >= 10) {
-      result[i] = re % 10;
-      flag = 1;
-    } else {
-      result[i] = re;
-      flag = 0
-    }
-  }
-  return result.join('').replace(/^0/g, '');
 
-}
 
 // 3. 树深度优先 非递归deepTravel  递归dfs
 function deepTravel(root) {
   if (!root) return;
-  const stack = [];
+  const stack = []
   root && stack.push(root);
   const result = [];
   while (stack.length) {
@@ -266,37 +236,7 @@ function kruskal(distance,pointSet){
 }
 
 // 12. Events
-function Events(){
-  this._cache = {};
-}
-Events.prototype.on = function(type,handle){
-  console.log('on',type)
-  if(!this._cache[type]){
-     this._cache[type] = [];
-  }
-  this._cache[type].push(handle)
 
-}
-Events.prototype.off = function(type,handle){
-  if(!this._cache[type]) return;
-  this._cache[type] = this._cache[type].filter(fn=>fn !== handle && fn.origin != handle)
-  
-}
-Events.prototype.once = function(type,handle){
-  const that = this;
-  function only(...args){
-    handle(...args)
-    that.off(type,handle);
-  }
-  only.origin = handle;
-  this.on(type,only);
-}
-Events.prototype.emit = function(type,...args){
-  if(!this._cache[type]) return;
-  this._cache[type].forEach(fn=>{
-      fn.call(this,...args)
-  })
-}      
 
 // 13. reduce实现map
 Array.prototype.myMap = function (cb){

@@ -1,10 +1,12 @@
-const {Node,
+const {
+       Node,
        getTreeDeep,
        preTraverseTree,
        preTraverseTreeRecursion,
        midTraverseTreeRecursion,
        midTraverseTree,
        afterTraverseTreeRecursion,
+       afterTraverseTree
 
 } = require("../src/utils")
 
@@ -44,6 +46,6 @@ describe("测试二叉树工具方法",()=>{
       expect(afterTraverseTreeRecursion(a)).toMatchObject([4,5,2,6,7,3,1])
   });
   it("测试二叉树后序迭代遍历",()=>{
-      expect(midTraverseTree(a)).toMatchObject([4,2,5,1,6,3,7])
+      expect(afterTraverseTree(a)).toMatchObject([4,5,2,6,7,3,1])
   });
 })
