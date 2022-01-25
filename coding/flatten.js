@@ -11,21 +11,20 @@ function flattenByre(arr){
     return result;
 }
 // 这种方式只适合纯数据类型
-function flattenBytoString(arr){
+function flattenByToString(arr){
     return arr.toString().split(',').map(ele=> +ele);
 }
 //
-function flattenByreduce(arr){
+function flattenByReduce(arr){
     return arr.reduce((prev,curr,index)=>{
         if(Array.isArray(curr)){
-            prev = prev.concat(flattenByreduce(curr))
+            prev = prev.concat(flattenByReduce(curr))
         }else{
             prev.push(curr);
         }
         return prev
     },[])
 }
-
 /**
  * 
  * @param {输入的数组} arr 
@@ -34,7 +33,7 @@ function flattenByreduce(arr){
  * @param {递归中的结果} output 
  */
 function flatten(arr,shallow,strict,output){
-    output = output || [];       // 初始化
+    output = output || [];
     let index = output.length;   // 全局通过此索引进行添加数据
     for(let i = 0; i < arr.length; i ++){  // 开始循环
         if(arr[i] instanceof Array){      // 判断是否为数组
