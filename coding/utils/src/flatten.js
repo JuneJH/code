@@ -26,7 +26,7 @@ function flattenByReduce(arr){
     },[])
 }
 /**
- * 
+ * 数组拉平
  * @param {输入的数组} arr 
  * @param {只做一层扁平} shallow 
  * @param {是否去除非数组元素} strict 
