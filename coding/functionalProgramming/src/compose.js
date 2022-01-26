@@ -16,16 +16,7 @@ function compose(...funcs){
     }
 }
 
-function add(a){
-    return a + 10;
+module.exports = {
+    compose
 }
-
-function d (a){
-    return a * 10;
-}
-
-const fn = compose(add,d);
-
-const result = fn(10);
-console.log("最终结果",result);
 
