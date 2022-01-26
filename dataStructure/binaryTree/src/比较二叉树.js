@@ -1,4 +1,4 @@
-var isSameTree = function(p, q) {
+const isSameTree = function(p, q) {
     if(p === null && q === null){
         return true
     }
@@ -12,7 +12,6 @@ var isSameTree = function(p, q) {
     const right = isSameTree(p.right,q.right);
     return left && right;
 };
-
 
 module.exports = {
     isSameTree,
