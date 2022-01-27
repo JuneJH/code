@@ -1,8 +1,10 @@
-//公共方法
+const { compare,change } = require("./utils");
 
-const compare = (a, b) => a > b ? true : false;
-const change = (arr, a, b) => { [arr[a], arr[b]] = [arr[b], arr[a]] }
-// 选择排序
+/**
+ * 选择排序
+ * @param arr
+ * @returns {*}
+ */
 function changeSort(arr) {
     for (let i = 0; i < arr.length; i++) {
         let maxIndex = i;

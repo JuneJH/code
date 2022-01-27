@@ -1,7 +1,10 @@
-//公共方法
+const { compare,change } = require("./utils");
 
-const compare = (a, b) => a > b ? true : false;
-const change = (arr, a, b) => { [arr[a], arr[b]] = [arr[b], arr[a]] }
+/**
+ * 快排
+ * @param arr
+ * @returns {*}
+ */
 function quickSort(arr) {
     function _quickSort(arr, start, end) {
         if (start > end - 1 || arr.length == 0 || start > arr.length) return;
