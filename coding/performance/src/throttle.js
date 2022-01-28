@@ -1,3 +1,9 @@
+/**
+ * 防抖
+ * @param {*} handle 
+ * @param {*} wait 
+ * @returns 
+ */
 function throttle(handle,wait){
     let lastTime = 0;
     return function(...args){
