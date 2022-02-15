@@ -168,3 +168,8 @@ const isSameTree = function(p, q) {
     return left && right;
 };
 ```
+
+## 7. 二叉树的搜索
+
+> 深度优先搜索: 搜索未知
+> 广度优先搜索： 搜索局域
