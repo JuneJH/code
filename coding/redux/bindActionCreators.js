@@ -1,4 +1,4 @@
-export default function (createActions,dispatch){
+function bindActionCreators(createActions,dispatch){
     if(typeof createActions === "function"){
         return autoDispath(createActions,dispatch);
     }else if(typeof createActions === "object"){
@@ -18,4 +18,8 @@ function autoDispath(createAction,dispatch){
     return function (...args){
         dispatch(createAction(...args));
     }
+}
+
+module.exports = {
+    bindActionCreators
 }

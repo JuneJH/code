@@ -2,12 +2,8 @@
 // 1. dispatch
 // 2. getState
 // 3. subscribe
-
-import { isPlainObject, random } from "./tools";
-
-
-
-export default function createStore(reducer, defaultState,enhander) {
+const { isPlainObject, random }   = require("./tools")
+function createStore(reducer, defaultState,enhander) {
     if(typeof defaultState === "function"){
         return defaultState(createStore)(reducer)
     }
@@ -46,4 +42,7 @@ export default function createStore(reducer, defaultState,enhander) {
         getState,
         subscribe,
     }
+}
+module.exports = {
+    createStore
 }

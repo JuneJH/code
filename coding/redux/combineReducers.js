@@ -1,5 +1,4 @@
-import reducer from "../redux/reducer";
-import { isPlainObject, random } from "./tools";
+const { isPlainObject, random } =require("./tools");
 
 
 function check(reducers){
@@ -26,9 +25,8 @@ function check(reducers){
     return true;
 }
 
-export default function(reducers){
+ function combineReducers(reducers){
     check(reducers);
-
     return function (state={},action){
         const newState = {};
         for (const key in reducers) {
@@ -39,4 +37,8 @@ export default function(reducers){
         }
         return newState;
     }
+}
+
+module.exports = {
+    combineReducers
 }

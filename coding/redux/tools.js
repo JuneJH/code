@@ -1,15 +1,15 @@
-export function random(len){
+ function random(len){
     return Math.random().toString(36).slice(2,len).split("").join(".");
 }
 
-export function isPlainObject(obj){
+ function isPlainObject(obj){
     if(typeof obj !== "object"){
         return false;
     }
     return Object.getPrototypeOf(obj) === Object.prototype;
 }
 
-export function compose(...fn){
+ function compose(...fn){
     if(fn.length === 0 ){
         return args=>args;
     }else if(fn.length === 1){
@@ -29,4 +29,10 @@ export function compose(...fn){
         }
         return lastParams;
     }
+}
+
+module.exports = {
+    random,
+    isPlainObject,
+    compose
 }

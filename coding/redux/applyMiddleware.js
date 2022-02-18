@@ -1,5 +1,5 @@
-import {compose} from "./tools";
-export default function applyMiddleware(...middlewares){
+const  {compose} = require("./tools");
+ function applyMiddleware(...middlewares){
     return function (createStore){
         return function (reduce,defauleState){
             const store = createStore(reduce,defauleState);
@@ -17,4 +17,8 @@ export default function applyMiddleware(...middlewares){
             }
         }
     }
+}
+
+module.exports = {
+    applyMiddleware
 }
