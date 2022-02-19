@@ -1,24 +1,5 @@
-function Node(value) {
-    this.value = value;
-    this.neighbor = [];
-}
-
-const a = new Node('a');
-const b = new Node('b');
-const c = new Node('c');
-const d = new Node('d');
-const e = new Node('e');
-
-const pointSet = [a,b,c,d,e];
-const distance = [
-    [0,4,7,Infinity,Infinity],
-    [4,0,8,6,Infinity],
-    [7,8,0,5,Infinity],
-    [Infinity,6,5,0,7],
-    [Infinity,Infinity,Infinity,7,0],
-]
 /**
- * 
+ * 普里姆算法
  * @param {*节点对象集合} pointSet 
  * @param {*路程的集合} distance 
  * @param {*起始位置} start 
@@ -63,5 +44,6 @@ function prim(pointSet,distance,start){
     return allDistance
 }
 
-console.log(prim(pointSet,distance,pointSet[2]));
-console.log(pointSet);
+module.exports = {
+    prim
+}

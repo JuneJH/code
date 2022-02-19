@@ -1,23 +1,9 @@
-function Node(value) {
-    this.value = value;
-    this.neighbor = [];
-}
-
-const a = new Node('a');
-const b = new Node('b');
-const c = new Node('c');
-const d = new Node('d');
-const e = new Node('e');
-
-const pointSet = [a, b, c, d, e];
-const distance = [
-    [0, 4, 7, Infinity, Infinity],
-    [4, 0, 8, 6, Infinity],
-    [7, 8, 0, 5, Infinity],
-    [Infinity, 6, 5, 0, 7],
-    [Infinity, Infinity, Infinity, 7, 0],
-]
-
+/**
+ * 克鲁斯卡尔算法
+ * @param pointSet  点
+ * @param distance  距离
+ * @returns {number}    最少路径
+ */
 function kruskal(pointSet, distance) {
     const resultList = [];
     let allDistance = 0;
@@ -82,11 +68,11 @@ function kruskal(pointSet, distance) {
         result.begin.neighbor.push(result.end);
         result.end.neighbor.push(result.begin);
         allDistance += result.minDistance;
-        // 注意resulList是一个二维数组
+        // 注意resultList是一个二维数组
         if (resultList.length == 1 && resultList[0].length == pointSet.length) break;
     }
     return allDistance;
+};
+module.exports = {
+    kruskal
 }
-
-console.log(kruskal(pointSet, distance))
-console.log(pointSet)
