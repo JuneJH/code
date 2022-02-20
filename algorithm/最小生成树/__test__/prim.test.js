@@ -6,7 +6,6 @@ test("测试普里姆算法",()=>{
     const c = new Graph('c');
     const d = new Graph('d');
     const e = new Graph('e');
-
     const pointSet = [a,b,c,d,e];
     const distance = [
         [0,4,7,Infinity,Infinity],
@@ -16,5 +15,5 @@ test("测试普里姆算法",()=>{
         [Infinity,Infinity,Infinity,7,0],
     ];
 
-    expect(prim(pointSet,distance,pointSet[2])).toBe(22)
+    expect(prim(pointSet,distance,a)).toBe(22)
 })
