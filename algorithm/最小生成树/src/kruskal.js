@@ -5,50 +5,10 @@
  * @returns {number}    最少路径
  */
 function kruskal(pointSet, distance) {
-    const resultList = [];
-    let allDistance = 0;
-    function _canlink(resultList, tempBegin, tempEnd){
-        let beginListIn = null;
-        let endListIn = null;
-        for(let i = 0; i < resultList.length; i ++){
-                if(resultList[i].includes(tempBegin)){
-                    beginListIn = resultList[i];
-                }
-                if(resultList[i].includes(tempEnd)){
-                    endListIn = resultList[i];
-                }
-        }
-        if(beginListIn !== null && endListIn != null && beginListIn == endListIn){//null也相等，所以需要判断是否为空
-            return false;
-        }
-        return true;
-    };
-    function _link(resultList, tempBegin, tempEnd){
-        let beginListIn = null;
-        let endListIn = null;
-        for(let i = 0; i < resultList.length; i ++){
-                if(resultList[i].includes(tempBegin)){
-                    beginListIn = resultList[i];
-                }
-                if(resultList[i].includes(tempEnd)){
-                    endListIn = resultList[i];
-                }
-        }
-        if(beginListIn == null && endListIn == null){
-            const newArr = [tempBegin,tempEnd];
-            resultList.push(newArr);
-        }else if(beginListIn == null && endListIn != null){
-            endListIn.push(tempBegin);
-        }else if(beginListIn != null && endListIn == null){
-            beginListIn.push(tempEnd)
-        }else if(beginListIn != null && endListIn !== null && endListIn != beginListIn){
-            beginListIn.push(...endListIn)//一定不要改变了beginListIn的数组地址指向
-            const endIndex = resultList.indexOf(endListIn);
-            resultList.splice(endIndex,1);
-        }
-    }
-    while (true) {
-        const result = {
+    const village = [];
+    let result = 0;
+    while (!(village.length == 1 && village[0].length == pointSet.length)) {
+        const temp = {
             minDistance: Infinity,
             end: null,
             begin: null
@@ -57,22 +17,48 @@ function kruskal(pointSet, distance) {
             for (let j = 0; j < distance[i].length; j++) {
                 const tempBegin = pointSet[i];
                 const tempEnd = pointSet[j];
-                if (i != j && result.minDistance > distance[i][j] && _canlink(resultList, tempBegin, tempEnd)) {
-                    result.begin = tempBegin;
-                    result.end = tempEnd;
-                    result.minDistance = distance[i][j];
+                const {t1,t2} = findNode(village,tempBegin,tempEnd);
+                if (i != j && temp.minDistance > distance[i][j] && !(t1 !== null && t2 != null && t1 == t2)) {
+                    temp.begin = tempBegin;
+                    temp.end = tempEnd;
+                    temp.minDistance = distance[i][j];
                 }
             }
         }
-        _link(resultList, result.begin, result.end);
-        result.begin.neighbor.push(result.end);
-        result.end.neighbor.push(result.begin);
-        allDistance += result.minDistance;
-        // 注意resultList是一个二维数组
-        if (resultList.length == 1 && resultList[0].length == pointSet.length) break;
+        const {t1,t2} = findNode(village,temp.begin,temp.end);
+        if(t1 == null && t2 == null){
+            const newArr = [temp.begin,temp.end];
+            village.push(newArr);
+        }else if(t1 == null && t2 != null){
+            t2.push(temp.begin);
+        }else if(t1 != null && t2 == null){
+            t1.push(temp.end)
+        }else if(t1 != null && t2 !== null && t1 != t2){
+            t1.push(...t2);
+            const endIndex = village.indexOf(t2);
+            village.splice(endIndex,1);
+        }
+        temp.begin.neighbor.push(temp.end);
+        temp.end.neighbor.push(temp.begin);
+        result += temp.minDistance;
     }
-    return allDistance;
+    return result;
 };
+function  findNode(village,p1,p2){
+    let t1 = null,t2 = null;
+    for(let i = 0; i < village.length; i ++){
+        const v = village[i];
+        if(v.includes(p1)){
+            t1 = v;
+        }
+        if(v.includes(p2)){
+            t2 = v;
+        }
+    }
+    return {
+        t1,t2
+    }
+}
 module.exports = {
     kruskal
 }
