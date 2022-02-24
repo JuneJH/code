@@ -1,4 +1,4 @@
-const {Node} = require("../utils");
+const {Node  ,getTreeDeep} = require("../utils");
 
 /**
  * 构建一颗二叉搜索树
@@ -49,29 +49,29 @@ function findBySearchBinaryTree(root, target) {
     }
 }
 
+/**
+ * 判断是否为平衡二叉树
+ * @param root
+ * @returns {*|boolean}
+ */
+function isBalanceTree(root) {
+    if (root == null) return true;
+    const isLeft = isBalanceTree(root.left);
+    const isRight = isBalanceTree(root.right);
+    const leftDeep = getTreeDeep(root.left);
+    const rightDeep = getTreeDeep(root.right);
+    if (Math.abs(leftDeep - rightDeep) > 1) {
+        return false;
+    } else {
+
+        return isLeft && isRight
+    }
+}
 module.exports = {
     createSearchBinaryTree,
-    findBySearchBinaryTree
+    findBySearchBinaryTree,
+    isBalanceTree,
 }
-// // 判断是否为平衡二叉树
-// function isBalance(root) {
-//     if (root == null) return true;
-//     // 返回树的深度
-//     function treeDeep(root) {
-//         if (root == null) return 0;
-//         return Math.max(treeDeep(root.left), treeDeep(root.right)) + 1;
-//     }
-//     const isLeft = isBalance(root.left);
-//     const isRight = isBalance(root.right);
-//     const leftDeep = treeDeep(root.left);
-//     const rightDeep = treeDeep(root.right);
-//     if (Math.abs(leftDeep - rightDeep) > 1) {
-//         return false;
-//     } else {
-//
-//         return isLeft && isRight
-//     }
-// }
 // // 返回树的深度
 // function treeDeep(root) {
 //     if (root == null) return 0;
