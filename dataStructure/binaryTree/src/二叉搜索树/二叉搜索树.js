@@ -67,19 +67,18 @@ function isBalanceTree(root) {
         return isLeft && isRight
     }
 }
-module.exports = {
-    createSearchBinaryTree,
-    findBySearchBinaryTree,
-    isBalanceTree,
-}
-//不能处理变化分支是唯一最深的分支，也不能一样最深分支
+/**
+ * 不能处理变化分支是唯一最深的分支，也不能一样最深分支
+ * @param root
+ * @returns {*}
+ */
 function sigleChange(root) {
     if (root == null) return;
-    if (isBalance(root)) return root;
+    if (isBalanceTree(root)) return root;
     root.left && (root.left = sigleChange(root.left));
     root.right && (root.right = sigleChange(root.right));
-    const leftDeep = treeDeep(root.left);
-    const rightDeep = treeDeep(root.right);
+    const leftDeep = getTreeDeep(root.left);
+    const rightDeep = getTreeDeep(root.right);
     if (Math.abs(leftDeep - rightDeep) <= 1) {
         return root;
     } else {
@@ -104,6 +103,13 @@ function sigleChange(root) {
         newRoot.left = root;
         return newRoot;
     }
+}
+
+module.exports = {
+    createSearchBinaryTree,
+    findBySearchBinaryTree,
+    isBalanceTree,
+    sigleChange,
 }
 //
 // // 升级单旋，左右单旋，右左单旋

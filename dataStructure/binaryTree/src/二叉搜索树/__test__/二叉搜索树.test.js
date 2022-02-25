@@ -1,4 +1,4 @@
-const {createSearchBinaryTree,findBySearchBinaryTree,isBalanceTree} = require("../二叉搜索树");
+const {createSearchBinaryTree,findBySearchBinaryTree,isBalanceTree,sigleChange} = require("../二叉搜索树");
 const { Node,getTreeDeep} = require("../../utils");
 
 describe("测试二叉搜索树",()=>{
@@ -16,7 +16,7 @@ describe("测试二叉搜索树",()=>{
     a.left = b;
     a.right = c;
     b.left = d;
-    b.right =e;
+    d.right =e;
 
     it("测试存在的",()=>{
         expect(findBySearchBinaryTree(searchBinaryTree,1)).toBe(true);
@@ -25,9 +25,13 @@ describe("测试二叉搜索树",()=>{
         expect(findBySearchBinaryTree(searchBinaryTree,-1)).toBe(false);
     });
     it("测试二叉树深度",()=>{
-        expect(getTreeDeep(a)).toBe(3);
+        expect(getTreeDeep(a)).toBe(4);
     });
     it("测试是否为平衡二叉树",()=>{
-        expect(isBalanceTree(a)).toBe(true);
+        expect(isBalanceTree(a)).toBe(false);
+    });
+    it("测试单旋",()=>{
+        const tree = sigleChange(a);
+        expect(isBalanceTree(tree)).toBe(false);
     })
 })
