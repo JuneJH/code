@@ -72,47 +72,39 @@ module.exports = {
     findBySearchBinaryTree,
     isBalanceTree,
 }
-// // 返回树的深度
-// function treeDeep(root) {
-//     if (root == null) return 0;
-//     return Math.max(treeDeep(root.left), treeDeep(root.right)) + 1;
-// }
-//
-// // 简单转换平衡二叉树，单旋
-// //不能处理变化分支是唯一最深的分支，也不能一样最深分支
-//
-// function sigleChange(root) {
-//     if (root == null) return;
-//     if (isBalance(root)) return root;
-//     root.left && (root.left = sigleChange(root.left));
-//     root.right && (root.right = sigleChange(root.right));
-//     const leftDeep = treeDeep(root.left);
-//     const rightDeep = treeDeep(root.right);
-//     if (Math.abs(leftDeep - rightDeep) <= 1) {
-//         return root;
-//     } else {
-//         if (leftDeep > rightDeep) {
-//             return rightRotate(root)
-//         } else {
-//             return leftRotate(root)
-//         }
-//     }
-//     function rightRotate(root) {
-//         const newRoot = root.left;
-//         const changeNode = newRoot.right;
-//         root.left = changeNode;
-//         newRoot.right = root;
-//         return newRoot;
-//
-//     }
-//     function leftRotate(root) {
-//         const newRoot = root.right;
-//         const changeNode = newRoot.left;
-//         root.right = changeNode;
-//         newRoot.left = root;
-//         return newRoot;
-//     }
-// }
+//不能处理变化分支是唯一最深的分支，也不能一样最深分支
+function sigleChange(root) {
+    if (root == null) return;
+    if (isBalance(root)) return root;
+    root.left && (root.left = sigleChange(root.left));
+    root.right && (root.right = sigleChange(root.right));
+    const leftDeep = treeDeep(root.left);
+    const rightDeep = treeDeep(root.right);
+    if (Math.abs(leftDeep - rightDeep) <= 1) {
+        return root;
+    } else {
+        if (leftDeep > rightDeep) {
+            return rightRotate(root)
+        } else {
+            return leftRotate(root)
+        }
+    }
+    function rightRotate(root) {
+        const newRoot = root.left;
+        const changeNode = newRoot.right;
+        root.left = changeNode;
+        newRoot.right = root;
+        return newRoot;
+
+    }
+    function leftRotate(root) {
+        const newRoot = root.right;
+        const changeNode = newRoot.left;
+        root.right = changeNode;
+        newRoot.left = root;
+        return newRoot;
+    }
+}
 //
 // // 升级单旋，左右单旋，右左单旋
 //
