@@ -75,6 +75,7 @@ function isBalanceTree(root) {
 function sigleChange(root) {
     if (root == null) return;
     if (isBalanceTree(root)) return root;
+    // 后序遍历
     root.left && (root.left = sigleChange(root.left));
     root.right && (root.right = sigleChange(root.right));
     const leftDeep = getTreeDeep(root.left);
@@ -83,26 +84,39 @@ function sigleChange(root) {
         return root;
     } else {
         if (leftDeep > rightDeep) {
+            // 右旋
             return rightRotate(root)
         } else {
+            // 左旋
             return leftRotate(root)
         }
     }
-    function rightRotate(root) {
-        const newRoot = root.left;
-        const changeNode = newRoot.right;
-        root.left = changeNode;
-        newRoot.right = root;
-        return newRoot;
+}
 
-    }
-    function leftRotate(root) {
-        const newRoot = root.right;
-        const changeNode = newRoot.left;
-        root.right = changeNode;
-        newRoot.left = root;
-        return newRoot;
-    }
+/**
+ * 右旋
+ * @param root
+ * @returns {*}
+ */
+function rightRotate(root) {
+    const newRoot = root.left;
+    const changeNode = newRoot.right;
+    root.left = changeNode;
+    newRoot.right = root;
+    return newRoot;
+}
+
+/**
+ * 左旋
+ * @param root
+ * @returns {*}
+ */
+function leftRotate(root) {
+    const newRoot = root.right;
+    const changeNode = newRoot.left;
+    root.right = changeNode;
+    newRoot.left = root;
+    return newRoot;
 }
 
 module.exports = {
