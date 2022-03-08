@@ -68,32 +68,6 @@ function isBalanceTree(root) {
     }
 }
 /**
- * 不能处理变化分支是唯一最深的分支，也不能一样最深分支
- * @param root
- * @returns {*}
- */
-function sigleChange(root) {
-    if (root == null) return;
-    if (isBalanceTree(root)) return root;
-    // 后序遍历
-    root.left && (root.left = sigleChange(root.left));
-    root.right && (root.right = sigleChange(root.right));
-    const leftDeep = getTreeDeep(root.left);
-    const rightDeep = getTreeDeep(root.right);
-    if (Math.abs(leftDeep - rightDeep) <= 1) {
-        return root;
-    } else {
-        if (leftDeep > rightDeep) {
-            // 右旋
-            return rightRotate(root)
-        } else {
-            // 左旋
-            return leftRotate(root)
-        }
-    }
-}
-
-/**
  * 右旋
  * @param root
  * @returns {*}
@@ -118,108 +92,108 @@ function leftRotate(root) {
     newRoot.left = root;
     return newRoot;
 }
+/**
+ * 不能处理变化分支是唯一最深的分支，也不能一样最深分支
+ * @param root
+ * @returns {*}
+ */
+function sigleChange(root) {
+    if (root == null) return;
+    if (isBalanceTree(root)) return root;
+    // 后序遍历
+    root.left && (root.left = sigleChange(root.left));
+    root.right && (root.right = sigleChange(root.right));
+    const leftDeep = getTreeDeep(root.left);
+    const rightDeep = getTreeDeep(root.right);
+    if (Math.abs(leftDeep - rightDeep) <= 1) {
+        return root;
+    } else {
+        if (leftDeep > rightDeep) {
+            // 右旋
+            return rightRotate(root)
+        } else {
+            // 左旋
+            return leftRotate(root)
+        }
+    }
+}
+/**
+ * 左右单旋,右左单旋
+ * @param root
+ * @returns {*}
+ */
+function doubleChange(root) {
+    if (root == null) return;
+    if (isBalance(root)) return root;
+    root.left && (root.left = doubleChange(root.left));
+    root.right && (root.right = doubleChange(root.right));
+    const leftDeep = treeDeep(root.left);
+    const rightDeep = treeDeep(root.right);
+    if (Math.abs(leftDeep - rightDeep) <= 1) {
+        return root;
+    } else {
+        if (leftDeep > rightDeep) {
+            const leftDeep = treeDeep(root.left.left)
+            const rightDeep = treeDeep(root.left.right)
+            if (leftDeep < rightDeep) {
+                root.left = leftRotate(root.left)
+            }
+            return rightRotate(root)
+        } else {
+            const leftDeep = treeDeep(root.right.left)
+            const rightDeep = treeDeep(root.right.right)
+            if (leftDeep > rightDeep) {
+                root.right = rightRotate(root.right)
+            }
+            return leftRotate(root)
+        }
+    }
+}
 
 module.exports = {
     createSearchBinaryTree,
     findBySearchBinaryTree,
     isBalanceTree,
     sigleChange,
+    doubleChange
 }
-//
-// // 升级单旋，左右单旋，右左单旋
-//
-// function doubleChange(root) {
-//     if (root == null) return;
-//     if (isBalance(root)) return root;
-//     root.left && (root.left = doubleChange(root.left));
-//     root.right && (root.right = doubleChange(root.right));
-//     const leftDeep = treeDeep(root.left);
-//     const rightDeep = treeDeep(root.right);
-//     if (Math.abs(leftDeep - rightDeep) <= 1) {
-//         return root;
-//     } else {
-//         if (leftDeep > rightDeep) {
-//             const leftDeep = treeDeep(root.left.left)
-//             const rightDeep = treeDeep(root.left.right)
-//             if (leftDeep < rightDeep) {
-//                 console.log('======')
-//                 root.left = leftRotate(root.left)
-//             }
-//             return rightRotate(root)
-//         } else {
-//             const leftDeep = treeDeep(root.right.left)
-//             const rightDeep = treeDeep(root.right.right)
-//             if (leftDeep > rightDeep) {
-//                 root.right = rightRotate(root.right)
-//             }
-//             return leftRotate(root)
-//         }
-//     }
-//     function rightRotate(root) {
-//         const newRoot = root.left;
-//         const changeNode = newRoot.right;
-//         root.left = changeNode;
-//         newRoot.right = root;
-//         return newRoot;
-//
-//     }
-//     function leftRotate(root) {
-//         const newRoot = root.right;
-//         const changeNode = newRoot.left;
-//         root.right = changeNode;
-//         newRoot.left = root;
-//         return newRoot;
-//     }
-// }
-// // 最总版平衡树
-// // 左左，右右
-// function finalChange(root) {
-//     if (root == null) return;
-//     if (isBalance(root)) return root;
-//     root.left && (root.left = finalChange(root.left));
-//     root.right && (root.right = finalChange(root.right));
-//     const leftDeep = treeDeep(root.left);
-//     const rightDeep = treeDeep(root.right);
-//     if (Math.abs(leftDeep - rightDeep) <= 1) {
-//         return root;
-//     } else {
-//         if (leftDeep > rightDeep) {
-//             const leftDeep = treeDeep(root.left.left)
-//             const rightDeep = treeDeep(root.left.right)
-//             if (leftDeep < rightDeep) {
-//                 root.left = leftRotate(root.left)
-//             }
-//             const newRoot =  rightRotate(root);
-//             newRoot.right = finalChange(newRoot.right);
-//             return finalChange(newRoot)
-//         } else {
-//             const leftDeep = treeDeep(root.right.left)
-//             const rightDeep = treeDeep(root.right.right)
-//             if (leftDeep > rightDeep) {
-//                 root.right = rightRotate(root.right)
-//             }
-//             const newRoot = leftRotate(root)
-//             newRoot.left = finalChange(newRoot.left);
-//             return finalChange(newRoot)
-//         }
-//     }
-//     // 右旋
-//     function rightRotate(root) {
-//         const newRoot = root.left;
-//         const changeNode = newRoot.right;
-//         root.left = changeNode;
-//         newRoot.right = root;
-//         return newRoot;
-//
-//     }
-//     function leftRotate(root) {
-//         const newRoot = root.right;
-//         const changeNode = newRoot.left;
-//         root.right = changeNode;
-//         newRoot.left = root;
-//         return newRoot;
-//     }
-// }
+
+/**
+ * 左右双旋
+ * @param root
+ * @returns {*}
+ */
+function finalChange(root) {
+    if (root == null) return;
+    if (isBalance(root)) return root;
+    root.left && (root.left = finalChange(root.left));
+    root.right && (root.right = finalChange(root.right));
+    const leftDeep = treeDeep(root.left);
+    const rightDeep = treeDeep(root.right);
+    if (Math.abs(leftDeep - rightDeep) <= 1) {
+        return root;
+    } else {
+        if (leftDeep > rightDeep) {
+            const leftDeep = treeDeep(root.left.left)
+            const rightDeep = treeDeep(root.left.right)
+            if (leftDeep < rightDeep) {
+                root.left = leftRotate(root.left)
+            }
+            const newRoot =  rightRotate(root);
+            newRoot.right = finalChange(newRoot.right);
+            return finalChange(newRoot)
+        } else {
+            const leftDeep = treeDeep(root.right.left)
+            const rightDeep = treeDeep(root.right.right)
+            if (leftDeep > rightDeep) {
+                root.right = rightRotate(root.right)
+            }
+            const newRoot = leftRotate(root)
+            newRoot.left = finalChange(newRoot.left);
+            return finalChange(newRoot)
+        }
+    }
+}
 
 //
 // const a = new Node('a')
@@ -268,32 +242,7 @@ module.exports = {
 // const finala = finalChange(twoa);
 // // console.log(treeDeep(finala))
 
-// console.log('isBalance', isBalance(finala))
-
-
-
-
-
-
-//=======================调用函数区域==========================================
-
-//生成二叉搜索树
-// const root = createTree(arr);
-// // 包装为平衡二叉树
-// const balanceRoot = finalChange(root)
-// console.log(balanceRoot.value)
-// const rootvalue = balanceRoot.value
-// console.log(findBySearchBinaryTree(balanceRoot,rootvalue),treeSum)
-// // // 调用搜索函数
-// const resultarr = searchArr(arr,1000)
-// console.log(resultarr.isSerach,resultarr.count)
-// // 调用搜素树函数
-// console.log(searchTree(balanceRoot,1000),treeSum)
-
-
-
-
-// ==============================================================================
+// console.log('isBalance', isBalance(finala)
 
 
 
