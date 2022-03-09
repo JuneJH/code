@@ -149,15 +149,6 @@ function doubleChange(root) {
         }
     }
 }
-
-module.exports = {
-    createSearchBinaryTree,
-    findBySearchBinaryTree,
-    isBalanceTree,
-    sigleChange,
-    doubleChange
-}
-
 /**
  * 左右双旋
  * @param root
@@ -195,55 +186,14 @@ function finalChange(root) {
     }
 }
 
-//
-// const a = new Node('a')
-// const b = new Node('b')
-// const c = new Node('c')
-// const d = new Node('d')
-// const e = new Node('e')
-// const f = new Node('f')
-// const g = new Node('g')
-// // a.left = b;
-// a.right = c;
-// c.left = g;
-// b.left = d;
-// b.right = e
-// d.left = f;
-// f.left = g
-
-// 生成变化分支为唯一深度
-// a.left = b;
-// b.left = c;
-// b.right = d;
-// d.left = e
-
-// 右左单旋
-// a.right = b;
-// b.left = c;
-// b.right = d;
-// c.left = e
-
-// 生成变化分支的深度与最高深度相等
-
-// a.left = b;
-// b.right = e;
-// e.left = f;
-// b.left = c;
-// c.left = d
-
-// console.log('isBalance', isBalance(a))
-// const newa = sigleChange(a)
-// console.log('isBalance', isBalance(newa))
-
-// const twoa = doubleChange(a);
-
-// console.log('isBalance', isBalance(twoa))
-
-// const finala = finalChange(twoa);
-// // console.log(treeDeep(finala))
-
-// console.log('isBalance', isBalance(finala)
-
+module.exports = {
+    createSearchBinaryTree,
+    findBySearchBinaryTree,
+    isBalanceTree,
+    sigleChange,
+    doubleChange,
+    finalChange
+}
 
 
 
