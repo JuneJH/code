@@ -1,25 +1,7 @@
-// 创建一棵树
-
-function Node(value){
-    this.value = value;
-    this.children = []
-}
-
-const a = new Node('a');
-const b = new Node('b');
-const c = new Node('c');
-const d = new Node('d');
-const e = new Node('e');
-const f = new Node('f');
-const g = new Node('g');
-
-a.children.push(b,c,d);
-
-b.children.push(e,g);
-
-e.children.push(f);
-
-// 
+/**
+ * 广度优先遍历
+ * @param roots
+ */
 function bfs(roots){
     if(roots == null || roots.length == 0) return;
     const children = []
@@ -29,10 +11,13 @@ function bfs(roots){
     }
     bfs(children)
 }
-// bfs([a])
 
-// 
-
+/**
+ * 广度优先查找
+ * @param roots
+ * @param target
+ * @returns {boolean|boolean|*}
+ */
 function bfSearch(roots,target){
     if(roots == null || roots.length == 0) return false;
     const children = [];
@@ -46,4 +31,7 @@ function bfSearch(roots,target){
     return bfSearch(children,target)
 }
 
-console.log(bfSearch([a],'e'))
+module.exports = {
+    bfs,
+    bfSearch
+}
