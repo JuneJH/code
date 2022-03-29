@@ -1,5 +1,5 @@
 const {ListNode} = require("../src/utils");
-const {hasCycle} = require('../src/环形链表');
+const {hasCycle} = require('../src/circle');
 
 test('环形链表', () => {
   const head = new ListNode(3,null);

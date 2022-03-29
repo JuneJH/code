@@ -1,8 +1,19 @@
+/**
+ * 创建一个链表
+ * @param val
+ * @param next
+ * @constructor
+ */
 function ListNode(val, next) {
     this.val = (val===undefined ? 0 : val)
     this.next = (next===undefined ? null : next)
 }
 
+/**
+ * 遍历链表
+ * @param root
+ * @returns {*[]}
+ */
 function nodeEach (root) {
     const result = [];
     while(root != null){
@@ -12,6 +23,11 @@ function nodeEach (root) {
     return result;
 }
 
+/**
+ * 链表逆转
+ * @param root
+ * @returns {null|*}
+ */
 function nodeReverse(root) {
     if(root.next.next == null){
         root.next.next = root;
@@ -24,6 +40,11 @@ function nodeReverse(root) {
     }
 }
 
+/**
+ * 获取链表长度
+ * @param root
+ * @returns {number}
+ */
 function nodeLength (root) {
     let len = 0;
     while(root !== null) {

@@ -1,4 +1,4 @@
-const {mergeTwoLists} = require('../src/合并有序链表');
+const {mergeTwoLists} = require('../src/mergeInOrder');
 const {ListNode,nodeEach} = require("../src/utils")
 
 test('合并有序链表', () => {
