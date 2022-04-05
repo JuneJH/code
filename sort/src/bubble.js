@@ -1,7 +1,7 @@
 const { compare,change } = require("./utils");
 
 /**
- * 冒泡排序
+ * 冒泡排序：两两比较符合条件(根据排序顺序)就交换位置,把大的或者小的数冒泡至前面
  * @param arr
  * @returns {*}
  */

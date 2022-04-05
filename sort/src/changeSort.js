@@ -1,7 +1,7 @@
 const { compare,change } = require("./utils");
 
 /**
- * 选择排序
+ * 选择排序: 一次循环找到最大或者最小值
  * @param arr
  * @returns {*}
  */
