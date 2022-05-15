@@ -1,4 +1,4 @@
-const {isTree} = require("../src/平衡二叉树");
+const {isSameTree} = require("../src/比较二叉树");
 const {Node} = require("../src/utils")
 
 
@@ -18,5 +18,5 @@ test("比较二叉树",()=>{
 
     c.left = f;
     c.right = g;
-    expect(isTree(a)).toBe(true);
+    expect(isSameTree(a,a)).toBe(true);
 })
