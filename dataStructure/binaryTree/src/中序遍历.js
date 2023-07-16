@@ -28,6 +28,16 @@ function ldr4stack(root){
     return result;
 }
 
+function ldr(root,result = []){
+    if(root == null){
+        return result;
+    }
+    ldr(root.left,result);
+    result.push(root.val);
+    ldr(root.right,result);
+    return result;
+}
+
 module.exports = {
     ldr,
     ldr4stack
