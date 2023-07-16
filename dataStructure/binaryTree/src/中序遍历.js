@@ -1,5 +1,9 @@
-
-
+/**
+ * 【递归】中序遍历
+ * @param {*} root 
+ * @param {*} result 
+ * @returns 
+ */
 function ldr(root,result = []){
     if(root == null){
         return result;
@@ -9,7 +13,11 @@ function ldr(root,result = []){
     ldr(root.right,result);
     return result;
 }
-
+/**
+ * 【队列】中序遍历
+ * @param {*} root 
+ * @returns 
+ */
 function ldr4stack(root){
     const result = [];
     if(root == null){
@@ -28,17 +36,21 @@ function ldr4stack(root){
     return result;
 }
 
-function ldr(root,result = []){
-    if(root == null){
-        return result;
-    }
-    ldr(root.left,result);
-    result.push(root.val);
-    ldr(root.right,result);
-    return result;
+function *ldrGenrotor(root){
+    if(root === null){
+        return []
+    };
+    yield *ldrGenrotor(root.left);
+    yield root.val;
+    yield *ldrGenrotor(root.right);
+}
+
+function callLdrGenrotor(root){
+    return [...ldrGenrotor(root)];
 }
 
 module.exports = {
     ldr,
-    ldr4stack
+    ldr4stack,
+    callLdrGenrotor
 }

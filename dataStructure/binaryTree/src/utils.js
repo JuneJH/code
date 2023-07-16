@@ -7,6 +7,8 @@ function Node(val) {
     this.left = null;
     this.right = null;
 }
+
+
 /**
  * 得到树的深度
  * @param {*} root 
