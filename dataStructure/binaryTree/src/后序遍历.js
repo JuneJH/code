@@ -36,7 +36,23 @@ function lrd4Stack(root) {
     return result;
 }
 
+function *lrdGenrotor(root){
+    if(root == null){
+        return;
+    }
+
+    yield *lrdGenrotor(root.left);
+    yield *lrdGenrotor(root.right);
+    yield root.val;
+}
+
+function callLrdGenrotor(root){
+    const res =  [...lrdGenrotor(root)];
+    return res;
+}
+
 module.exports = {
     lrd,
-    lrd4Stack
+    lrd4Stack,
+    callLrdGenrotor
 }

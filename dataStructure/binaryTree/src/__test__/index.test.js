@@ -4,7 +4,7 @@ const { ldr,
     callLdrGenrotor } = require("../中序遍历");
 
 const { lrd,
-    lrd4Stack } = require("../后序遍历");
+    lrd4Stack ,callLrdGenrotor} = require("../后序遍历");
 const { Node, getTreeDeep } = require("../utils");
 describe("测试二叉树遍历", () => {
     const a = new Node("1");
@@ -43,7 +43,7 @@ describe("测试二叉树遍历", () => {
     it("【后序遍历】栈方案",()=>{
         expect(lrd4Stack(a)).toEqual(["5", "4", "2", "3", "1"]);
     });
-    // it("【后序遍历】迭代器方案",()=>{
-    //     expect(preOrderGeneratorCall(a)).toEqual(["1","2","4","5","3"]);
-    // });
+    it("【后序遍历】迭代器方案",()=>{
+        expect(callLrdGenrotor(a)).toEqual(["5", "4", "2", "3", "1"]);
+    });
 })
