@@ -1,10 +1,8 @@
 const { preOrder, preOrder4Stack, preOrderGeneratorCall } = require("../先序遍历");
-const { ldr,
-    ldr4stack,
-    callLdrGenrotor } = require("../中序遍历");
+const { ldr,ldr4stack,callLdrGenrotor } = require("../中序遍历");
+const { lrd,lrd4Stack ,callLrdGenrotor} = require("../后序遍历");
+const {morrisInOrderTraversal} = require("../莫里斯遍历");
 
-const { lrd,
-    lrd4Stack ,callLrdGenrotor} = require("../后序遍历");
 const { Node, getTreeDeep } = require("../utils");
 describe("测试二叉树遍历", () => {
     const a = new Node("1");
@@ -35,6 +33,9 @@ describe("测试二叉树遍历", () => {
     });
     it("【中序遍历】迭代器方案", () => {
         expect(callLdrGenrotor(a)).toEqual(["4", "5", "2", "1", "3"]);
+    });
+    it("【中序遍历】莫里斯遍历", () => {
+        expect(morrisInOrderTraversal(a)).toEqual(["4", "5", "2", "1", "3"]);
     });
 
     it("【后序遍历】递归方案", () => {
