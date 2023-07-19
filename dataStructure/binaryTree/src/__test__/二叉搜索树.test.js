@@ -1,5 +1,5 @@
 const {createSearchBinaryTree,findBySearchBinaryTree,isBalanceTree,sigleChange,doubleChange,finalChange} = require("../二叉搜索树");
-const { Node,getTreeDeep} = require("../../utils");
+const { Node,getTreeDeep} = require("../utils");
 
 describe("测试二叉搜索树",()=>{
     const arr = [1];

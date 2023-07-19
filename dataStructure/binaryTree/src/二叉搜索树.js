@@ -1,4 +1,4 @@
-const {Node  ,getTreeDeep} = require("../utils");
+const {Node  ,getTreeDeep} = require("./utils");
 
 /**
  * 构建一颗二叉搜索树
