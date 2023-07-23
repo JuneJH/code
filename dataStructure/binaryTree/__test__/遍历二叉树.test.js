@@ -1,9 +1,9 @@
-const { preOrder, preOrder4Stack, preOrderGeneratorCall } = require("../先序遍历");
-const { ldr,ldr4stack,callLdrGenrotor } = require("../中序遍历");
-const { lrd,lrd4Stack ,callLrdGenrotor} = require("../后序遍历");
-const {morrisInOrderTraversal} = require("../莫里斯遍历");
+const { preOrder, preOrder4Stack, preOrderGeneratorCall } = require("../src/先序遍历");
+const { ldr,ldr4stack,callLdrGenrotor } = require("../src/中序遍历");
+const { lrd,lrd4Stack ,callLrdGenrotor} = require("../src/后序遍历");
+const {morrisInOrderTraversal} = require("../src/莫里斯遍历");
 
-const { Node, getTreeDeep } = require("../utils");
+const { Node, getTreeDeep } = require("../src/utils");
 describe("测试二叉树遍历", () => {
     const a = new Node("1");
     const b = new Node("2");
@@ -19,7 +19,7 @@ describe("测试二叉树遍历", () => {
         expect(preOrder(a)).toEqual(["1", "2", "4", "5", "3"]);
     });
     it("【前序遍历】栈方案", () => {
-        expect(preOrderGeneratorCall(a)).toEqual(["1", "2", "4", "5", "3"]);
+        expect(preOrder4Stack(a)).toEqual(["1", "2", "4", "5", "3"]);
     });
     it("【前序遍历】迭代器方案", () => {
         expect(preOrderGeneratorCall(a)).toEqual(["1", "2", "4", "5", "3"]);
