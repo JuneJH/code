@@ -26,3 +26,7 @@ function isValid(s) {
     }
     return !statck.length;
 };
+
+module.exports = {
+    isValid
+}
