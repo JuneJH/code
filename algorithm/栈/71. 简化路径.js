@@ -11,8 +11,21 @@
 // 返回简化后得到的 规范路径 。
 
 function simplifyPath(path) {
-    
-    return path;
+    const stack = [];
+    const pathArray = path.split("/");
+    for(let i = 0; i < pathArray.length; i ++){
+        const item = pathArray[i];
+        if(item == ".."){
+            stack.pop();
+        }else{
+            if(!!item && item != "."){
+                stack.push(item);
+
+            }
+        }
+    }
+
+    return "/"+stack.join("/");  
 };
 
 module.exports = {
